@@ -1,0 +1,14 @@
+{
+    "currency": [
+       {
+          "name": "ONS",
+          "title": "Altın Bunun Adı",
+          "fee": 1500
+       },
+       {
+        "name": "USDTRY",
+        "title": "Dolar Bunun Adı",
+        "fee": 150000
+       }
+    ]
+ }
