@@ -31,6 +31,11 @@
             color: #fff;
         }
 
+        .currency-list-item a {
+            color: #fff;
+            text-decoration: none;
+        }
+
         .currency-list-item:first-child>div:last-child {
             flex: 0 1 30px;
         }
@@ -143,7 +148,7 @@
 
         let firstData = "";
 
-        socket.on('chat message', function (msg) {
+        socket.on('getAllCurrency', function (msg) {
 
             //console.log(msg);
 
@@ -159,7 +164,7 @@
 
             for (const [key, value] of Object.entries(msg)) {
 
-                //**let currenyItem = '';
+                //**let currencyItem = '';
 
                 //console.log(`${key}: ${value}`);
 
@@ -172,15 +177,15 @@
 
                     if (keys == "code") {
                         //console.log(`${keys}: ${values}`);
-                        //**currenyItem += `<div>${values}</div>`;
+                        //**currencyItem += `<div>${values}</div>`;
                     }
                     if (keys == "alis") {
                         //console.log(`${keys}: ${values}`);
-                        //**currenyItem += `<div>${values}</div>`;
+                        //**currencyItem += `<div>${values}</div>`;
                     }
                     if (keys == "satis") {
                         //console.log(`${keys}: ${values}`);
-                        //**currenyItem += `<div>${values}</div>`;
+                        //**currencyItem += `<div>${values}</div>`;
                     }
                     if (keys == "dir") {
 
@@ -189,20 +194,20 @@
                         // console.log("=============")
 
                         if (values.satis_dir == 'up') {
-                            //**currenyItem += `<div class="up"></div>`;
+                            //**currencyItem += `<div class="up"></div>`;
                         }
                         else if (values.satis_dir == 'down') {
-                            //**currenyItem += `<div class="down"></div>`;
+                            //**currencyItem += `<div class="down"></div>`;
                         }
                         else {
-                            //**currenyItem += `<div></div>`;
+                            //**currencyItem += `<div></div>`;
                         }
 
                     }
                     //console.log(`${keys}: ${values}`);
 
                 }
-                //**currencyTable.innerHTML += `<div class="currency-list-item">${currenyItem}</div>`;
+                //**currencyTable.innerHTML += `<div class="currency-list-item">${currencyItem}</div>`;
 
 
                 // console.log("=============")
@@ -214,15 +219,15 @@
 
 
 
-        socket.on('currency data', function (msg) {
+        socket.on('getCurrencyFilter', function (msg) {
 
             // console.log(firstData['AEDTRY'].alis);
             //console.log(firstData);
 
             currencyTable.innerHTML = "";
             currencyBar.innerHTML = "";
-            let currenyItem = "";
-            let currenyBarItem = "";
+            let currencyItem = "";
+            let currencyBarItem = "";
             let alis = "";
             let satis = "";
 
@@ -230,33 +235,33 @@
             currencyBar.innerHTML += `<div><div>&nbsp;</div><div>ALIŞ</div><div>SATIŞ</div></div>`;
 
             msg.forEach(function (index, arr) {
-                currenyItem = '';
-                currenyBarItem = '';
+                currencyItem = '';
+                currencyBarItem = '';
 
-                currenyItem += `<div>${index['title']} (${index['name']})</div>`;
+                currencyItem += `<div><a href="/${index['name']}">${index['title']} (${index['name']})</a></div>`;
                 alis = parseFloat(firstData[index['name']].alis) + parseFloat(index['fee']);
-                currenyItem += `<div>${alis.toFixed(2)}</div>`;
+                currencyItem += `<div>${alis.toFixed(2)}</div>`;
                 satis = parseFloat(firstData[index['name']].satis) + parseFloat(index['fee']);
-                currenyItem += `<div>${satis.toFixed(2)}</div>`;
+                currencyItem += `<div>${satis.toFixed(2)}</div>`;
 
                 if (firstData[index['name']].dir.satis_dir == 'up') {
-                    currenyItem += `<div class="direction up"></div>`;
+                    currencyItem += `<div class="direction up"></div>`;
                 }
                 else if (firstData[index['name']].dir.satis_dir == 'down') {
-                    currenyItem += `<div class="direction down"></div>`;
+                    currencyItem += `<div class="direction down"></div>`;
                 }
                 else {
-                    currenyItem += `<div class="direction"></div>`;
+                    currencyItem += `<div class="direction"></div>`;
                 }
 
                 // alt bar ekleme
                 if (firstData['USDTRY'] || firstData['EURTRY'] || firstData['ONS']) {
 
-                    currenyBarItem += `<div>${index['title']} (${index['name']})</div>`;
+                    currencyBarItem += `<div>${index['title']} (${index['name']})</div>`;
                     alis = parseFloat(firstData[index['name']].alis) + parseFloat(index['fee']);
-                    currenyBarItem += `<div>${alis.toFixed(2)}</div>`;
+                    currencyBarItem += `<div>${alis.toFixed(2)}</div>`;
                     satis = parseFloat(firstData[index['name']].satis) + parseFloat(index['fee']);
-                    currenyBarItem += `<div>${satis.toFixed(2)}</div>`;
+                    currencyBarItem += `<div>${satis.toFixed(2)}</div>`;
 
                 }
 
@@ -267,8 +272,8 @@
                 //console.log(result.toFixed(2));
                 //console.log("--------------")
 
-                currencyTable.innerHTML += `<div class="currency-list-item">${currenyItem}</div>`;
-                currencyBar.innerHTML += `<div>${currenyBarItem}</div>`;
+                currencyTable.innerHTML += `<div class="currency-list-item">${currencyItem}</div>`;
+                currencyBar.innerHTML += `<div>${currencyBarItem}</div>`;
             })
 
 
@@ -278,7 +283,7 @@
 
 
         document.addEventListener("DOMContentLoaded", function () {
-            socket.emit('chat message', "başla");
+            socket.emit('getAllCurrency', "start");
         });
 
 

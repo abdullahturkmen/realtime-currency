@@ -1,0 +1,59 @@
+<script>
+
+    let getUrl = window.location.pathname.replaceAll('/', '').toUpperCase();
+    document.title = getUrl;
+
+</script>
+
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <div class="currency-list"></div>
+    <div class="currency-bar"></div>
+
+
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
+
+    <script>
+        var socket = io();
+
+        socket.on('getSelectCurrency', function (msg) {
+
+            //console.log(firstData['AEDTRY'].alis);
+            console.log(msg);
+
+            msg.forEach(function (index, arr) {
+
+
+                //console.log(index['name'])
+                //console.log("+++++++++++++++")
+                //console.log(firstData[index['name']].alis)
+                //let result = parseFloat(firstData[index['name']].alis) + parseFloat(index['fee']);
+                //console.log(result.toFixed(2));
+                //console.log("--------------")
+
+            })
+
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            socket.emit('getSelectCurrency', getUrl);
+        });
+
+
+    </script>
+
+</body>
+
+</html>
