@@ -1,16 +1,20 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const axios = require('axios').default;
 const port = process.env.PORT || 3000;
 
+app.use(express.static(__dirname));
+
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.redirect('/index.html');
 });
 
 
-app.get('/:userId', (req, res) => {
-  res.sendFile(__dirname + '/detail.html')
+app.get('/users/:userId', (req, res) => {
+  const userId = req.params.userId;
+  res.redirect(`/user.html?userId=${userId}`);
 })
 
 
