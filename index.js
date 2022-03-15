@@ -12,10 +12,12 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/users/:userId', (req, res) => {
-  const userId = req.params.userId;
-  res.redirect(`/user.html?userId=${userId}`);
+app.get('/detail/:codes', (req, res) => { 
+  const codes = req.params.codes;
+  res.redirect(`/detail.html?codes=${codes}`);
 })
+
+
 
 
 io.on('connection', (socket) => {
@@ -23,25 +25,32 @@ io.on('connection', (socket) => {
   socket.on('getAllCurrency', msg => {
 
     setInterval(function () {
-        
-        axios({
-          method: 'post',
-          headers: {'X-Requested-With': 'XMLHttpRequest'},
-          url: 'https://www.haremaltin.com/ajax/all_prices'
-        })
-        .then(function (response) {
-            //console.log(response);
 
-            axios.post('https://cizrekuyumculardernegi.org/Kurapi/curency-data.json', {})
-            .then(function (secondResponse){
+      axios({
+        method: 'post',
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        url: 'https://www.haremaltin.com/ajax/all_prices'
+      })
+        .then(function (response) {
+          //console.log(response);
+
+          axios({
+            method: 'get',
+            headers: {'X-Requested-With': 'XMLHttpRequest'},
+            url: 'https://raw.githubusercontent.com/abdullahturkmen/realtime-currency/master/currency-data.json',
+     
+           
+          })
+            .then(function (secondResponse) {
               //console.log(secondResponse.data.currency);
+              
               io.emit('getAllCurrency', response.data.data);
               io.emit('getCurrencyFilter', secondResponse.data.currency);
             });
 
         });
 
-      }, 1000);
+    }, 1000);
 
   });
 
@@ -49,25 +58,27 @@ io.on('connection', (socket) => {
   socket.on('getSelectCurrency', msg => {
 
     setInterval(function () {
-        
-        axios({
-          method: 'post',
-          headers: {'X-Requested-With': 'XMLHttpRequest'},
-          url: 'https://www.haremaltin.com/ajax/all_prices'
-        })
-        .then(function (response) {
-            //console.log(response);
 
-            axios.post('https://cizrekuyumculardernegi.org/Kurapi/curency-data.json', {})
-            .then(function (secondResponse){
-              console.log(response);
+      axios({
+        method: 'post',
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        url: 'https://www.haremaltin.com/ajax/all_prices'
+      })
+        .then(function (response) {
+          //console.log(response);
+
+          axios.get('https://raw.githubusercontent.com/abdullahturkmen/realtime-currency/master/currency-data.json', {})
+            .then(function (secondResponse) {
+              //console.log("==========================");
+              //console.log(response);
+              //console.log("========================");
               io.emit('getSelectCurrency', response.data.data);
               io.emit('getSelectCurrency', secondResponse.data.currency);
             });
 
         });
 
-      }, 1000);
+    }, 1000);
 
   });
 

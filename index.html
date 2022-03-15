@@ -238,7 +238,7 @@
                 currencyItem = '';
                 currencyBarItem = '';
 
-                currencyItem += `<div><a href="/${index['name']}">${index['title']} (${index['name']})</a></div>`;
+                currencyItem += `<div><a href="/detail/${index['name']}">${index['title']} (${index['name']})</a></div>`;
                 alis = parseFloat(firstData[index['name']].alis) + parseFloat(index['fee']);
                 currencyItem += `<div>${alis.toFixed(2)}</div>`;
                 satis = parseFloat(firstData[index['name']].satis) + parseFloat(index['fee']);
