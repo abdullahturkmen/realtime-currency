@@ -2,93 +2,93 @@
    "currency": [
       {
          "name": "ONS",
-         "title": "Altın 1",
-         "sell_fee": 145,
-         "buy_fee": 280,
+         "title": "Ons",
+         "sell_fee": 1,
+         "buy_fee": 1,
          "display": "swiper"
       },
       {
-         "name": "ONS",
-         "title": "Altın 2",
-         "sell_fee": 615,
-         "buy_fee": 420,
+         "name": "ALTIN",
+         "title": "Altın",
+         "sell_fee": 1,
+         "buy_fee": 1,
          "display": "swiper"
       },
       {
-         "name": "ONS",
-         "title": "Altın 3",
-         "sell_fee": 315,
-         "buy_fee": 620,
+         "name": "EURTRY",
+         "title": "Euro",
+         "sell_fee": 1,
+         "buy_fee": 1,
          "display": "swiper"
       },
       {
-         "name": "ONS",
-         "title": "Altın 4",
-         "sell_fee": 715,
-         "buy_fee": 260,
+         "name": "AYAR22",
+         "title": "22 Ayar",
+         "sell_fee": 1,
+         "buy_fee": 1,
          "display": "swiper"
       },
       {
-         "name": "ONS",
-         "title": "Altın 5",
-         "sell_fee": 145,
-         "buy_fee": 220,
+         "name": "KULCEALTIN",
+         "title": "Külçe Altın",
+         "sell_fee": 1,
+         "buy_fee": 1,
          "display": "swiper"
       },
       {
-         "name": "ONS",
-         "title": "Altın 6",
-         "sell_fee": 115,
-         "buy_fee": 420,
+         "name": "CEYREK_YENI",
+         "title": "Çeyrek Altın",
+         "sell_fee": 1,
+         "buy_fee": 1,
          "display": "swiper"
       },
       {
-         "name": "ONS",
-         "title": "Altın 7",
-         "sell_fee": 215,
-         "buy_fee": 203,
+         "name": "YARIM_YENI",
+         "title": "Yarım Altın",
+         "sell_fee": 1,
+         "buy_fee": 1,
          "display": "swiper"
       },
       {
-         "name": "USDTRY",
-         "title": "Dolar 1",
-         "sell_fee": 13,
-         "buy_fee": 52,
+         "name": "GREMESE_YENI",
+         "title": "Gremese",
+         "sell_fee": 1,
+         "buy_fee": 1,
+         "display": "table"
+      },
+      {
+         "name": "ATA_YENI",
+         "title": "Ata Lira",
+         "sell_fee": 1,
+         "buy_fee": 1,
+         "display": "table"
+      },
+      {
+         "name": "AYAR14",
+         "title": "14 Ayar",
+         "sell_fee": 1,
+         "buy_fee": 1,
+         "display": "table"
+      },
+      {
+         "name": "JPYTRY",
+         "title": "Japon Yeni",
+         "sell_fee": 1,
+         "buy_fee": 1,
          "display": "table"
       },
       {
          "name": "USDTRY",
-         "title": "Dolar 2",
-         "sell_fee": 31,
-         "buy_fee": 25,
+         "title": "Dolar",
+         "sell_fee": 1,
+         "buy_fee": 1,
          "display": "table"
       },
       {
-         "name": "USDTRY",
-         "title": "Dolar 3",
-         "sell_fee": 12,
-         "buy_fee": 42,
-         "display": "table"
-      },
-      {
-         "name": "USDTRY",
-         "title": "Dolar 4",
-         "sell_fee": 41,
-         "buy_fee": 32,
-         "display": "table"
-      },
-      {
-         "name": "USDTRY",
-         "title": "Dolar 5",
-         "sell_fee": 31,
-         "buy_fee": 22,
-         "display": "table"
-      },
-      {
-         "name": "USDTRY",
-         "title": "Dolar 6",
-         "sell_fee": 12,
-         "buy_fee": 21,
+         "name": "EURUSD",
+         "title": "Euro/Dolar",
+         "sell_fee": 1,
+         "buy_fee": 1,
          "display": "table"
       }
    ]
