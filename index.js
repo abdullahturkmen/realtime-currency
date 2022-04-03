@@ -38,20 +38,14 @@ io.on('connection', (socket) => {
             method: 'get',
             headers: {'X-Requested-With': 'XMLHttpRequest'},
             url: 'https://raw.githubusercontent.com/abdullahturkmen/realtime-currency/master/currency-data.json',
-     
-           
           })
             .then(function (secondResponse) {
               //console.log(secondResponse.data.currency);
-              
               io.emit('getAllCurrency', response.data.data);
               io.emit('getCurrencyFilter', secondResponse.data.currency);
             });
-
         });
-
     }, 1000);
-
   });
 
 
@@ -73,18 +67,12 @@ io.on('connection', (socket) => {
               //console.log(response);
               //console.log("========================");
               io.emit('getSelectCurrency', response.data.data);
-              io.emit('getSelectCurrency', secondResponse.data.currency);
+              io.emit('getSelectFilterCurrency', secondResponse.data.currency);
             });
-
         });
-
     }, 1000);
-
   });
-
 });
-
-
 
 
 http.listen(port, () => {
