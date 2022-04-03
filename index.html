@@ -57,23 +57,36 @@
                     class="swiper">
                     <!-- Additional required wrapper -->
                     <div
-                        class="swiper-wrapper currency-swiper"><!-- Slides -->
-
+                        class="swiper-wrapper currency-swiper">
+<div class="swiper-slide">ONS (Altın 1)
+                        <br>2204.10
+                        <br>2069.70</div><div class="swiper-slide">ONS (Altın 2)
+                        <br>2344.10
+                        <br>2539.70</div><div class="swiper-slide">ONS (Altın 3)
+                        <br>2544.10
+                        <br>2239.70</div><div class="swiper-slide">ONS (Altın 4)
+                        <br>2184.10
+                        <br>2639.70</div><div class="swiper-slide">ONS (Altın 5)
+                        <br>2144.10
+                        <br>2069.70</div><div class="swiper-slide">ONS (Altın 6)
+                        <br>2344.10
+                        <br>2039.70</div><div class="swiper-slide">ONS (Altın 7)
+                        <br>2127.10
+                        <br>2139.70</div>
                     </div>
 
                 </div>
 
 
-                <table class="table table-dark table-striped currency-table">
+                <table class="table table-dark table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Cins</th>
+                            <th scope="col">Alış</th>
+                            <th scope="col">Satış</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody class="currency-table"></tbody>
 
                 </table>
 
@@ -81,10 +94,6 @@
             </div>
 
         </main>
-
-
-        <div class="currency-list"></div>
-        <div class="currency-bar"></div>
 
 
         <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
@@ -95,7 +104,7 @@
 
 
         <script>
-            const swiper = new Swiper('.swiper', { // Optional parameters
+            let swiper = new Swiper('.swiper', { // Optional parameters
                 direction: 'horizontal',
                 loop: true,
                 breakpoints: {
@@ -119,14 +128,33 @@
         <script>
             var socket = io();
 
-            const currencyTablex = document.querySelector('.currency-list');
-            const currencyBar = document.querySelector('.currency-bar');
+     
             const currencyTable = document.querySelector('.currency-table');
             const currencySwiper = document.querySelector('.currency-swiper');
 
             let firstData = "";
 
             socket.on('getAllCurrency', function (msg) { // console.log(msg);
+
+                 swiper = new Swiper('.swiper', { // Optional parameters
+                direction: 'horizontal',
+                loop: true,
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20
+                    },
+                    768: {
+                        slidesPerView: 4,
+                        spaceBetween: 40
+                    },
+                    1024: {
+                        slidesPerView: 5,
+                        spaceBetween: 50
+                    }
+                }
+
+            });
 
                 firstData = msg;
                 // **currencyTable.innerHTML = "";
@@ -173,12 +201,9 @@
                 // console.log(firstData['AEDTRY'].alis);
                 // console.log(firstData);
 
-                currencyTablex.innerHTML = "";
-                currencyBar.innerHTML = "";
+                
                 currencyTable.innerHTML = "";
                 currencySwiper.innerHTML = "";
-                let currencyItem = "";
-                let currencyBarItem = "";
                 let currencyTableItem = "";
                 let currencySwiperItem = "";
                 let alis = "";
@@ -186,8 +211,10 @@
 
 
                 msg.forEach(function (index, arr) {
-                    currencyItem = '';
-                    currencyBarItem = '';
+
+                   // console.log(msg);
+
+         
                     currencyTableItem = '';
                     currencySwiperItem = '';
 
@@ -219,7 +246,7 @@
                     satis = parseFloat(firstData[index['name']].satis) + parseFloat(index['sell_fee']);
 
                     // swiper ekleme
-                    if (firstData['display'] === "swiper") {
+                    if (index['display'] === "swiper") {
 
                         currencySwiperItem += `<div class="swiper-slide">${
                             index['name']
@@ -250,22 +277,18 @@
                     }
 
                     // table ekleme
-                    if (firstData['display'] === "table") {
+                    if (index['display'] === "table") {
 
-                        currencyTableItem += `<tr>
-                            <td scope="row">${
-                            index['name']
-                        }</td>
-                            <td>${
+                        currencyTableItem += `<tr>  
+                        <td scope="row">${
                             index['title']
                         }</td>
-                            <td>${
+                        <td>${
                             alis.toFixed(2)
                         }</td>
-                            <td>${
+                        <td>${
                             satis.toFixed(2)
-                        }</td>
-                        </tr>`;
+                        }</td></tr>`;
 
                         // currencyBarItem += `<div>${
                         //     index['title']

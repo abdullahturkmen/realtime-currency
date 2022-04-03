@@ -22,7 +22,7 @@ app.get('/detail/:codes', (req, res) => {
 
 io.on('connection', (socket) => {
 
-  socket.on('getAllCurrency', msg => {
+  socket.on('getAllCurrency', msg => { // for main page
 
     setInterval(function () {
 
@@ -55,7 +55,7 @@ io.on('connection', (socket) => {
   });
 
 
-  socket.on('getSelectCurrency', msg => {
+  socket.on('getSelectCurrency', msg => { // for details page
 
     setInterval(function () {
 
