@@ -63,9 +63,7 @@ io.on('connection', (socket) => {
 
           axios.get('https://raw.githubusercontent.com/abdullahturkmen/realtime-currency/master/currency-data.json', {})
             .then(function (secondResponse) {
-              //console.log("==========================");
               //console.log(response);
-              //console.log("========================");
               io.emit('getSelectCurrency', response.data.data);
               io.emit('getSelectFilterCurrency', secondResponse.data.currency);
             });

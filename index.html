@@ -8,7 +8,7 @@
         <title>Realtime Currency</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="./assets/css/style.css">
 
     </head>
 
@@ -41,9 +41,9 @@
                 <div class="carousel-inner">
 
                     <div class="carousel-item active">
-                        <img src="https://picsum.photos/id/330/2500/750" class="d-block w-100" alt="...">
+                        <img src="./assets/img/carousel-bg.webp" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
+                            <h1>Third slide label</h5>
                             <p>Some representative placeholder content for the third slide.</p>
                         </div>
                     </div>
@@ -51,15 +51,9 @@
 
             </div>
 
-            <div
-                class="container">
-
-                <!-- Slider main container -->
-                <div
-                    class="swiper">
-                    <!-- Additional required wrapper -->
+            <div class="container">
+                <div class="swiper">
                     <div class="swiper-wrapper currency-swiper"></div>
-
                 </div>
 
 
@@ -76,7 +70,6 @@
 
                 </table>
 
-
             </div>
 
         </main>
@@ -88,234 +81,7 @@
 
         <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
 
-
-        <script>
-            var socket = io();
-
-
-            const currencyTable = document.querySelector('.currency-table');
-            const currencySwiper = document.querySelector('.currency-swiper');
-
-            let firstData = "";
-
-            socket.on('getAllCurrency', function (msg) { // console.log(msg);
-
-                swiper = new Swiper('.swiper', { // Optional parameters
-                    direction: 'horizontal',
-                    loop: true,
-                    breakpoints: {
-                        640: {
-                            slidesPerView: 2,
-                            spaceBetween: 20
-                        },
-                        768: {
-                            slidesPerView: 4,
-                            spaceBetween: 40
-                        },
-                        1024: {
-                            slidesPerView: 5,
-                            spaceBetween: 50
-                        }
-                    }
-
-                });
-
-                firstData = msg;
-                // **currencyTable.innerHTML = "";
-                // document.getElementById("demo").innerHTML = msg['AEDTRY'].alis
-
-                for (const [key, value] of Object.entries(msg)) {
-
-                    // **let currencyItem = '';
-                    // console.log(`${key}: ${value}`);
-
-                    for (const [keys, values] of Object.entries(value)) { // console.log(`${keys}: ${values}`);
-
-                        if (keys == "code") {
-                            // console.log(`${keys}: ${values}`);
-                            // **currencyItem += `<div>${values}</div>`;
-                        }
-                        if (keys == "alis") {
-                            // console.log(`${keys}: ${values}`);
-                            // **currencyItem += `<div>${values}</div>`;
-                        }
-                        if (keys == "satis") {
-                            // console.log(`${keys}: ${values}`);
-                            // **currencyItem += `<div>${values}</div>`;
-                        }
-                        if (keys == "dir") {
-                            // console.log(`alis: ${values.alis_dir} - satıs: ${values.satis_dir}`);
-                            // console.log("=============")
-
-                            if (values.satis_dir == 'up') { // **currencyItem += `<div class="up"></div>`;
-                            } else if (values.satis_dir == 'down') { // **currencyItem += `<div class="down"></div>`;
-                            } else { // **currencyItem += `<div></div>`;
-                            }
-
-                        }
-                        // console.log(`${keys}: ${values}`);
-                    }
-                    // **currencyTable.innerHTML += `<div class="currency-list-item">${currencyItem}</div>`;
-                    // console.log("=============")
-                }
-            });
-
-            socket.on('getCurrencyFilter', function (msg) {
-
-                // console.log(firstData['AEDTRY'].alis);
-                // console.log(firstData);
-
-
-                currencyTable.innerHTML = "";
-                currencySwiper.innerHTML = "";
-                let currencyTableItem = "";
-                let currencySwiperItem = "";
-                let alis = "";
-                let satis = "";
-
-
-                msg.forEach(function (index, arr) { // console.log(msg);
-
-
-                    currencyTableItem = '';
-                    currencySwiperItem = '';
-
-                    // currencyItem += `<div><a href="/detail/${
-                    //     index['name']
-                    // }">${
-                    //     index['title']
-                    // } (${
-                    //     index['name']
-                    // })</a></div>`;
-                    // alis = parseFloat(firstData[index['name']].alis) + parseFloat(index['fee']);
-                    // currencyItem += `<div>${
-                    //     alis.toFixed(2)
-                    // }</div>`;
-                    // satis = parseFloat(firstData[index['name']].satis) + parseFloat(index['fee']);
-                    // currencyItem += `<div>${
-                    //     satis.toFixed(2)
-                    // }</div>`;
-
-                    // if (firstData[index['name']].dir.satis_dir == 'up') {
-                    //     currencyItem += `<div class="direction up"></div>`;
-                    // } else if (firstData[index['name']].dir.satis_dir == 'down') {
-                    //     currencyItem += `<div class="direction down"></div>`;
-                    // } else {
-                    //     currencyItem += `<div class="direction"></div>`;
-                    // }
-
-                    alis = parseFloat(firstData[index['name']].alis) + parseFloat(index['buy_fee']);
-                    satis = parseFloat(firstData[index['name']].satis) + parseFloat(index['sell_fee']);
-
-                    // swiper ekleme
-                    if (index['display'] === "swiper") {
-
-                        currencySwiperItem += `<div class="swiper-slide"><a href="/detail/${
-                            index['name']
-                        }">${
-                            index['name']
-                        } (${
-                            index['title']
-                        })
-                        <br>${
-                            alis.toFixed(2)
-                        }
-                        <br>${
-                            satis.toFixed(2)
-                        }</a></div>`;
-
-                        // currencyBarItem += `<div>${
-                        //     index['title']
-                        // } (${
-                        //     index['name']
-                        // })</div>`;
-                        // alis = parseFloat(firstData[index['name']].alis) + parseFloat(index['fee']);
-                        // currencyBarItem += `<div>${
-                        //     alis.toFixed(2)
-                        // }</div>`;
-                        // satis = parseFloat(firstData[index['name']].satis) + parseFloat(index['fee']);
-                        // currencyBarItem += `<div>${
-                        //     satis.toFixed(2)
-                        // }</div>`;
-
-                    }
-
-                    // table ekleme
-                    if (index['display'] === "table") {
-
-
-                        currencyTableItem += `<tr>  
-                        <td scope="row">${
-                            index['title']
-                        }</td>
-                        <td>${
-                            alis.toFixed(2)
-                        }</td>
-                        <td>${
-                            satis.toFixed(2)
-                        }</td>
-                        <td>
-                            <a href="/detail/${
-                            index['name']
-                        }" class="btn btn-sm">⚡</a></td></tr>`;
-
-                        // currencyBarItem += `<div>${
-                        //     index['title']
-                        // } (${
-                        //     index['name']
-                        // })</div>`;
-                        // alis = parseFloat(firstData[index['name']].alis) + parseFloat(index['fee']);
-                        // currencyBarItem += `<div>${
-                        //     alis.toFixed(2)
-                        // }</div>`;
-                        // satis = parseFloat(firstData[index['name']].satis) + parseFloat(index['fee']);
-                        // currencyBarItem += `<div>${
-                        //     satis.toFixed(2)
-                        // }</div>`;
-
-
-                    }
-
-                    // console.log(index['name'])
-                    // console.log("+++++++++++++++")
-                    // console.log(firstData[index['name']].alis)
-                    // let result = parseFloat(firstData[index['name']].alis) + parseFloat(index['fee']);
-                    // console.log(result.toFixed(2));
-                    // console.log("--------------")
-
-                    // currencyTable.innerHTML += `<div class="currency-list-item">${currencyItem}</div>`;
-                    // currencyBar.innerHTML += `<div>${currencyBarItem}</div>`;
-                    currencyTable.innerHTML += currencyTableItem;
-                    currencySwiper.innerHTML += currencySwiperItem;
-                })
-
-
-                let swiper = new Swiper('.swiper', { // Optional parameters
-                    direction: 'horizontal',
-                    loop: true,
-                    breakpoints: {
-                        640: {
-                            slidesPerView: 2,
-                            spaceBetween: 20
-                        },
-                        768: {
-                            slidesPerView: 4,
-                            spaceBetween: 40
-                        },
-                        1024: {
-                            slidesPerView: 5,
-                            spaceBetween: 50
-                        }
-                    }
-                });
-
-            });
-
-
-            document.addEventListener("DOMContentLoaded", function () {
-                socket.emit('getAllCurrency', "start");
-            });
-        </script>
+        <script src="./assets/js/index.js"></script>
     </body>
 
 </html>
